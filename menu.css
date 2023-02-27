@@ -1,0 +1,222 @@
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* CSS variable */
+:root{
+    --primary-color: rgba(13,110,139,0.6);
+    --secondary-color: rgba(229, 148, 0 , 0.9);
+    --overlay-color: rgba(24,39,51, 0.85 );
+    --menu-speed: 0.75s;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+ul{
+    list-style: none;
+}
+li a{
+    text-decoration: none;
+}
+.container{
+    max-width: 960px;
+    margin: auto;
+    padding: 0 48px;
+    overflow: hidden;
+   
+}
+#showcase{
+    background-color: var(--primary-color);
+    height: 100vh;
+    color: #f4f4f4;
+    position: relative;
+}
+#showcase::before{
+    content: "";
+    background: url(./image/Beach.jpg) no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+   
+}
+
+#showcase .showcase-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+#showcase h1{
+    font-size: 64px;
+    padding: 16px;
+
+}
+#showcase p{
+    font-size: 24px;
+    padding: 16px;
+    margin-bottom: 8px;
+}
+.btn{
+    display: inline-block;
+    font-size: 18px;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: #f4f4f4;
+    padding: 16px 32px;
+    margin-top: 16px;
+    border: none;
+    transition: all 1s ease-in-out;
+}
+.btn:hover{
+    opacity: 0.6;
+  
+}
+/* Menu section */
+.menu-wrap{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.menu-wrap .toggler{
+     position:absolute;
+     top: 0;
+     left: 0;
+     z-index: 2;
+     cursor: pointer;
+     width: 50px;
+     height: 50px;
+     opacity: 0;
+}
+.menu-wrap .hamburger{
+    position:absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+/* Hamburger line */
+.menu-wrap .hamburger > div{
+    position: relative;
+    flex: none;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+/* Hamburger lines- top and bottom*/
+.menu-wrap .hamburger > div::before,
+.menu-wrap .hamburger > div::after{
+    content: "";
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 2px;
+    background: inherit;
+    z-index: 1;
+}
+/* moves line down */
+.menu-wrap .hamburger > div::after{
+    top: 10px;
+}
+
+/* Toggler animation */
+.menu-wrap .toggler:checked + .hamburger > div{
+    transform: rotate(135deg);
+}
+/* turns lines into X */
+.menu-wrap .toggler:checked + .hamburger > div:before, 
+.menu-wrap .toggler:checked + .hamburger > div:after{
+    top: 0;
+    transform:rotate(90deg);
+}
+
+/* Rotate on hover when checked */
+.menu-wrap .toggler:checked:hover + .hamburger > div{
+    transform: rotate(225deg);
+}
+
+/* show menu when toggler is checked */
+.menu-wrap .toggler:checked ~ .menu{
+    visibility: visible;
+}
+.menu-wrap .toggler:checked ~ .menu >div{
+    transform: scale(1);
+    transition-duration: var(--menu-speed);
+}
+.menu-wrap .toggler:checked ~ .menu >div>div{
+opacity: 1;
+transition: opacity 0.4s ease 0.4s;
+}
+
+
+/* Menu items */
+.menu-wrap .menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden; 
+    /* we will have visibility when checkbox is checked */
+}
+
+.menu-wrap .menu > div{
+    background-color: var(--overlay-color);
+    height: 200vh;
+    width: 200vh;
+    border-radius: 50%;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    /* We will increase its scaled when checkbox is checked */
+    transition: all 0.4s ease;
+}
+
+.menu-wrap .menu > div > div{
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vh;
+    opacity: 0;
+    /* We will make it visible when checke box is checked */
+    transition: opacity 0.4s ease;
+}
+
+.menu-wrap .menu > div > div >ul >li{
+    color: #fff;
+   font-size: 24px;
+   padding: 16px;
+}
+.menu-wrap .menu > div > div >ul >li >a {
+    color: inherit;
+    transition: color 0.4s ease;
+}
+
+.menu-wrap .menu > div > div >ul >li >a:hover{
+    color: var(--secondary-color);
+}
